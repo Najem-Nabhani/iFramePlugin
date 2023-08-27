@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>content</title>
+</head>
+<script>
+    window.addEventListener("message", receiveMessage, false); 
+    
+    function receiveMessage(event) {
+        fetch('http://localhost:3000/ok').then(()=> {
+            console.log('I will now render the content given the page data');
+            const doc = document.getElementById('pick-box');
+            doc.style  = "display: block";
+            console.log('Received message from iframe:', event.data, event.origin);
+        }).catch((err) => {
+            console.error('opps', err);
+        });
+    }
+</script>
+
+<body>
+    <div style="display: none;" id="pick-box">
+        <h3> pick the correct answer: </h3>
+        <form>
+            <p>
+                <input type="radio" name="options" title="option#1"/> A
+            </p>
+            <p>
+                <input type="radio" name="options" title="option#2"/> B
+            </p>
+            <p>
+                <input type="radio" name="options" title="option#3"/> C
+            </p>
+        </form>
+    </div>
+</body>
+</html>
